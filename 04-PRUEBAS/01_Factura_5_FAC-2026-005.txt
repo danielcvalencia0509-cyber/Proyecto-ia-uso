@@ -1,0 +1,23 @@
+FACTURA DE VENTA ELECTRÓNICA: FAC-2026-005
+
+Fecha de emisión: 2026-03-15
+
+Fecha de vencimiento: 2026-04-15
+
+Emisor: Papeleria y Suministros Modernos
+
+NIT / RUT: 800.765.432-8
+
+Adquirente / Cliente: Colegio Panamericano
+
+Concepto / Descripción del servicio: Papel resma carta, tintas y utiles de oficina
+
+Subtotal: $850,000 COP
+
+Impuesto IVA (19%): Incluido
+
+TOTAL A PAGAR: $850,000 COP
+
+Forma de pago: Transferencia electrónica a cuenta corriente empresarial
+
+Estado del pago: Emitida y pendiente de liquidación

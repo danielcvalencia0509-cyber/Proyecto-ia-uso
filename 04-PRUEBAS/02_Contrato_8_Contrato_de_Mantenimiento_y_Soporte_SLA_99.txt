@@ -1,0 +1,19 @@
+INSTRUMENTO CONTRACTUAL: CONTRATO DE MANTENIMIENTO Y SOPORTE SLA 99
+
+Fecha de suscripción: 2026-02-18
+
+Partes intervinientes: DataCenter Andes y Entidad de Salud Publica
+
+Objeto del contrato: Ejecución conforme a especificaciones técnicas pactadas y estándares de calidad.
+
+Vigencia y duración: 18 meses
+
+Valor o contraprestación acordada: $9,200,000 COP mensuales
+
+Régimen de penalidades: Descuento del 5% en facturacion por cada hora de caida
+
+Cláusula de Confidencialidad: Toda información revelada tendrá carácter reservado.
+
+Jurisdicción aplicable: Tribunales de la República de Colombia.
+
+Firmado en señal de conformidad por los representantes legales acreditados.

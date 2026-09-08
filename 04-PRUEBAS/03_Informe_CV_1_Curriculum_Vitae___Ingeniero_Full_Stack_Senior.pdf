@@ -1,0 +1,52 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 4 0 R /Resources << /Font << /F1 5 0 R >> >> >>
+endobj
+4 0 obj
+<< /Length 779 >>
+stream
+BT
+/F1 16 Tf
+50 750 Td
+(Curriculum Vitae - Ingeniero Full Stack Senior) Tj
+/F1 10 Tf
+0 -25 Td
+(DOCUMENTO TECNICO / INFORME: CURRICULUM VITAE - INGENIERO FULL STACK SENIOR) Tj
+0 -15 Td
+(Autor / Titular del expediente: Carlos Alberto Perez Mendoza) Tj
+0 -15 Td
+(Fecha de emision: 2026-01-11) Tj
+0 -15 Td
+(Perfil y Resumen Ejecutivo: Especialista en Vue.js, Node.js, arquitectura limpia y bases de datos MySQL con 6 anos de experiencia.) Tj
+0 -15 Td
+(Competencias clave y Resultados: Node.js, Express, Docker, Prisma, Microservicios, TypeScript) Tj
+0 -15 Td
+(Conclusiones y Recomendaciones: Se evidencia cumplimiento riguroso de objetivos empresariales e idoneidad tecnica en el area evaluada.) Tj
+0 -15 Td
+(Aprobado por: Direccion General de Operaciones SoluIA UTS.) Tj
+0 -15 Td
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000234 00000 n 
+0000000300 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+380
+%%EOF

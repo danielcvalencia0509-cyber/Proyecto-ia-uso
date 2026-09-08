@@ -1,0 +1,23 @@
+FACTURA DE VENTA ELECTRÓNICA: FAC-2026-007
+
+Fecha de emisión: 2026-03-17
+
+Fecha de vencimiento: 2026-04-17
+
+Emisor: Servicios de Catering y Eventos
+
+NIT / RUT: 901.444.555-6
+
+Adquirente / Cliente: Fundacion Progreso
+
+Concepto / Descripción del servicio: Almuerzos ejecutivos y estacion de cafe empresarial
+
+Subtotal: $2,300,000 COP
+
+Impuesto IVA (19%): Incluido
+
+TOTAL A PAGAR: $2,300,000 COP
+
+Forma de pago: Transferencia electrónica a cuenta corriente empresarial
+
+Estado del pago: Emitida y pendiente de liquidación

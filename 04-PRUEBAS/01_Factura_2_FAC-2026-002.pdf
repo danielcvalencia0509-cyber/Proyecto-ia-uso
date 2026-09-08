@@ -1,0 +1,62 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 4 0 R /Resources << /Font << /F1 5 0 R >> >> >>
+endobj
+4 0 obj
+<< /Length 757 >>
+stream
+BT
+/F1 16 Tf
+50 750 Td
+(FACTURA COMERCIAL FAC-2026-002) Tj
+/F1 10 Tf
+0 -25 Td
+(FACTURA DE VENTA ELECTRONICA: FAC-2026-002) Tj
+0 -15 Td
+(Fecha de emision: 2026-03-12) Tj
+0 -15 Td
+(Fecha de vencimiento: 2026-04-12) Tj
+0 -15 Td
+(Emisor: Distribuidora Logistica del Oriente) Tj
+0 -15 Td
+(NIT / RUT: 890.123.456-9) Tj
+0 -15 Td
+(Adquirente / Cliente: Almacenes Exito) Tj
+0 -15 Td
+(Concepto / Descripcion del servicio: Servicio de transporte y fletes de carga pesada) Tj
+0 -15 Td
+(Subtotal: $12,850,000 COP) Tj
+0 -15 Td
+(Impuesto IVA \(19%\): Incluido) Tj
+0 -15 Td
+(TOTAL A PAGAR: $12,850,000 COP) Tj
+0 -15 Td
+(Forma de pago: Transferencia electronica a cuenta corriente empresarial) Tj
+0 -15 Td
+(Estado del pago: Emitida y pendiente de liquidacion) Tj
+0 -15 Td
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000234 00000 n 
+0000000300 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+380
+%%EOF

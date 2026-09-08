@@ -1,0 +1,13 @@
+DOCUMENTO TÉCNICO / INFORME: CURRICULUM VITAE - DISENADOR UI UX Y FRONTEND
+
+Autor / Titular del expediente: Andres Felipe Suarez Gomez
+
+Fecha de emisión: 2026-01-15
+
+Perfil y Resumen Ejecutivo: Disenador interactivo enfocado en interfaces empresariales modernas, Figma y Tailwind CSS.
+
+Competencias clave y Resultados: Figma, Vue.js, Tailwind CSS, Accesibilidad Web, Prototipado rapido
+
+Conclusiones y Recomendaciones: Se evidencia cumplimiento riguroso de objetivos empresariales e idoneidad técnica en el área evaluada.
+
+Aprobado por: Dirección General de Operaciones SoluIA UTS.

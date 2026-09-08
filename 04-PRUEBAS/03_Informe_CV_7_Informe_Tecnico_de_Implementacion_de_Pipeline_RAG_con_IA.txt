@@ -1,0 +1,13 @@
+DOCUMENTO TÉCNICO / INFORME: INFORME TECNICO DE IMPLEMENTACION DE PIPELINE RAG CON IA
+
+Autor / Titular del expediente: Grupo de Investigacion en IA Aplicada UTS
+
+Fecha de emisión: 2026-01-17
+
+Perfil y Resumen Ejecutivo: Desarrollo de motor RAG documental usando embeddings y vectorizacion semantica.
+
+Competencias clave y Resultados: Precision de recuperacion del 92%, latencia media de respuesta inferior a 800ms
+
+Conclusiones y Recomendaciones: Se evidencia cumplimiento riguroso de objetivos empresariales e idoneidad técnica en el área evaluada.
+
+Aprobado por: Dirección General de Operaciones SoluIA UTS.
