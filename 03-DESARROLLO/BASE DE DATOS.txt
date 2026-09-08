@@ -1,0 +1,173 @@
+-- =============================================================================
+-- SCRIPT DDL Y DML: BASE DE DATOS SOLUIA
+-- Proyecto: Sistema Inteligente de Gestión y Análisis Documental
+-- Institución: Unidades Tecnológicas de Santander (UTS) - VI Semestre
+-- Asignatura: Desarrollo de Aplicaciones Empresariales
+-- Motor: MySQL 8.0+ / MariaDB 10.5+
+-- Charset: utf8mb4 / utf8mb4_unicode_ci
+-- =============================================================================
+
+-- 1. CREACIÓN DE LA BASE DE DATOS
+CREATE DATABASE IF NOT EXISTS `soluia_db`
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
+
+USE `soluia_db`;
+
+-- Desactivar temporalmente revisión de claves foráneas para recreación limpia
+SET FOREIGN_KEY_CHECKS = 0;
+
+-- 2. ELIMINACIÓN DE TABLAS SI YA EXISTEN (ORDEN INVERSO DE DEPENDENCIAS)
+DROP TABLE IF EXISTS `processing_logs`;
+DROP TABLE IF EXISTS `document_metadata`;
+DROP TABLE IF EXISTS `documents`;
+DROP TABLE IF EXISTS `folders`;
+DROP TABLE IF EXISTS `users`;
+
+SET FOREIGN_KEY_CHECKS = 1;
+
+-- =============================================================================
+-- 3. CREACIÓN DE TABLAS (DDL)
+-- =============================================================================
+
+-- -----------------------------------------------------------------------------
+-- TABLA 1: users (Usuarios del sistema)
+-- -----------------------------------------------------------------------------
+CREATE TABLE `users` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(100) NOT NULL,
+  `email` VARCHAR(150) NOT NULL,
+  `password_hash` VARCHAR(255) NOT NULL,
+  `role` ENUM('ADMIN', 'USER') NOT NULL DEFAULT 'USER',
+  `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `users_email_unique` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- -----------------------------------------------------------------------------
+-- TABLA 2: folders (Carpetas y estructura jerárquica)
+-- -----------------------------------------------------------------------------
+CREATE TABLE `folders` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(150) NOT NULL,
+  `parent_id` INT NULL DEFAULT NULL,
+  `user_id` INT NOT NULL,
+  `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `folders_user_id_idx` (`user_id`),
+  KEY `folders_parent_id_idx` (`parent_id`),
+  CONSTRAINT `fk_folders_user`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `users` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_folders_parent`
+    FOREIGN KEY (`parent_id`)
+    REFERENCES `folders` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- -----------------------------------------------------------------------------
+-- TABLA 3: documents (Archivos y texto sin estructurar)
+-- -----------------------------------------------------------------------------
+CREATE TABLE `documents` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `folder_id` INT NULL DEFAULT NULL,
+  `user_id` INT NOT NULL,
+  `filename` VARCHAR(255) NOT NULL,
+  `stored_path` VARCHAR(500) NOT NULL,
+  `mime_type` VARCHAR(100) NOT NULL,
+  `file_size` INT NOT NULL,
+  `raw_text` LONGTEXT NULL DEFAULT NULL,
+  `status` ENUM('PENDING', 'PROCESSING', 'COMPLETED', 'FAILED') NOT NULL DEFAULT 'PENDING',
+  `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `documents_user_id_idx` (`user_id`),
+  KEY `documents_folder_id_idx` (`folder_id`),
+  KEY `documents_status_idx` (`status`),
+  CONSTRAINT `fk_documents_user`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `users` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_documents_folder`
+    FOREIGN KEY (`folder_id`)
+    REFERENCES `folders` (`id`)
+    ON DELETE SET NULL
+    ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- -----------------------------------------------------------------------------
+-- TABLA 4: document_metadata (Insights, Resumen y Datos Estructurados de IA)
+-- -----------------------------------------------------------------------------
+CREATE TABLE `document_metadata` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `document_id` INT NOT NULL,
+  `category` VARCHAR(100) NOT NULL,
+  `summary` TEXT NULL DEFAULT NULL,
+  `structured_data` JSON NULL DEFAULT NULL,
+  `processed_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `document_metadata_document_id_unique` (`document_id`),
+  KEY `document_metadata_category_idx` (`category`),
+  CONSTRAINT `fk_metadata_document`
+    FOREIGN KEY (`document_id`)
+    REFERENCES `documents` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- -----------------------------------------------------------------------------
+-- TABLA 5: processing_logs (Trazabilidad y auditoría de excepciones)
+-- -----------------------------------------------------------------------------
+CREATE TABLE `processing_logs` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `document_id` INT NULL DEFAULT NULL,
+  `level` ENUM('INFO', 'WARN', 'ERROR') NOT NULL DEFAULT 'INFO',
+  `message` TEXT NOT NULL,
+  `error_stack` LONGTEXT NULL DEFAULT NULL,
+  `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `processing_logs_document_id_idx` (`document_id`),
+  KEY `processing_logs_level_idx` (`level`),
+  CONSTRAINT `fk_logs_document`
+    FOREIGN KEY (`document_id`)
+    REFERENCES `documents` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- =============================================================================
+-- 4. POBLAMIENTO INICIAL / SEEDER (DML)
+-- =============================================================================
+
+-- Contraseñas cifradas con bcrypt (coste 10):
+-- 'admin123' -> $2a$10$mMzipDQQGuLkjX/N/wFCSewRUEomeNmhPA27EHTZ3Iu7oJoS8xRXm
+-- 'user123'  -> $2a$10$N3t5T6JPtMcW01hWIAO78uUGIBVcNDDZXFHXMnfKOdK7WT/8bdAvS
+
+INSERT INTO `users` (`id`, `name`, `email`, `password_hash`, `role`) VALUES
+(1, 'Administrador SoluIA', 'admin@soluia.com', '$2a$10$mMzipDQQGuLkjX/N/wFCSewRUEomeNmhPA27EHTZ3Iu7oJoS8xRXm', 'ADMIN'),
+(2, 'Usuario Corporativo UTS', 'usuario@soluia.com', '$2a$10$N3t5T6JPtMcW01hWIAO78uUGIBVcNDDZXFHXMnfKOdK7WT/8bdAvS', 'USER');
+
+-- Carpetas predeterminadas para organización documental
+INSERT INTO `folders` (`id`, `name`, `parent_id`, `user_id`) VALUES
+(1, 'Financiera y Facturación', NULL, 2),
+(2, 'Legal y Contratos', NULL, 2),
+(3, 'Talento Humano e Informes', NULL, 2);
+
+-- Registro de inicialización en logs de auditoría
+INSERT INTO `processing_logs` (`id`, `document_id`, `level`, `message`, `error_stack`) VALUES
+(1, NULL, 'INFO', 'Base de datos SoluIA inicializada correctamente con esquema relacional v1.0.0.', NULL),
+(2, NULL, 'INFO', 'Semilla de usuarios y carpetas corporativas insertada exitosamente.', NULL);
+
+-- Ajuste de auto-incrementos
+ALTER TABLE `users` AUTO_INCREMENT = 3;
+ALTER TABLE `folders` AUTO_INCREMENT = 4;
+ALTER TABLE `processing_logs` AUTO_INCREMENT = 3;
+
+-- Confirmación
+SELECT 'Base de datos soluia_db implementada con éxito.' AS `Estado`;
